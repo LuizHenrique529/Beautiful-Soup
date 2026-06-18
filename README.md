@@ -1,4 +1,4 @@
-# Beatiful-Soup
+# Beautiful-Soup
 
 O **Beautiful Soup** é uma biblioteca Python muito popular e poderosa usada para *web scraping* (extração de dados de sites). Ele ajuda você a extrair informações de arquivos HTML e XML criando uma "árvore de análise" (parse tree) a partir do código-fonte da página, o que torna muito fácil navegar, pesquisar e modificar os dados.
 
