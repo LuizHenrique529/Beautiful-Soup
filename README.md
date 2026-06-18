@@ -1,57 +1,78 @@
-# Beautiful-Soup
+# Web Scraping Esportivo - Transfermarkt
 
-O **Beautiful Soup** é uma biblioteca Python muito popular e poderosa usada para *web scraping* (extração de dados de sites). Ele ajuda você a extrair informações de arquivos HTML e XML criando uma "árvore de análise" (parse tree) a partir do código-fonte da página, o que torna muito fácil navegar, pesquisar e modificar os dados.
+Projeto desenvolvido para a disciplina de **Linguagem de Programação II** da **Fatec Rio Claro**.
 
-Aqui está um resumo rápido de como ele funciona e por que é tão utilizado:
+O script acessa o site Transfermarkt e extrai automaticamente dados dos elencos de times de futebol, salvando as informações em arquivos `.csv` para análise.
 
-### Principais Recursos
+---
 
-* **Tolerante a HTML mal formatado:** É famoso por lidar muito bem com códigos HTML mal escritos ou quebrados (frequentemente chamados de "tag soup").
-* **Navegação Intuitiva:** Oferece comandos simples e naturais da linguagem Python para navegar, pesquisar e modificar os elementos da página.
-* **Parsers Flexíveis:** Ele não analisa os documentos por conta própria; em vez disso, ele funciona por cima de analisadores (parsers) Python populares, como o `html.parser` (nativo do Python), `lxml` ou `html5lib`.
+## O que o script coleta
 
-### Como Começar
+Para cada jogador de cada time configurado, o script extrai:
 
-Para usar o Beautiful Soup, primeiro você precisa instalá-lo, geralmente junto com a biblioteca `requests` (que é usada para baixar os dados da página da web).
+- Nome completo  
+- Posição  
+- Idade  
+- Nacionalidade  
+- Valor de mercado  
 
-```bash
-pip install beautifulsoup4 requests
+---
 
-```
+## Times configurados (padrão)
 
-### Exemplo Básico
+- Flamengo  
+- Palmeiras  
+- Corinthians  
 
-Aqui está um exemplo rápido de como você pode baixar uma página da web e extrair informações específicas usando o Beautiful Soup:
+Você pode adicionar ou trocar times editando a lista `TIMES` no início do script.
 
-```python
-from bs4 import BeautifulSoup
-import requests
+---
 
-# 1. Baixar o conteúdo HTML
-url = "http://example.com"
-response = requests.get(url)
-html_content = response.text
+## Tecnologias utilizadas
 
-# 2. Analisar (parse) o HTML usando o Beautiful Soup
-soup = BeautifulSoup(html_content, 'html.parser')
+- requests → Download das páginas web  
+- beautifulsoup4 → Análise e extração do HTML  
+- csv → Gravação dos dados coletados  
+- os / sys → Gerenciamento do ambiente  
 
-# 3. Extrair dados!
-# Obter o título da página
-page_title = soup.title.string
-print(f"Título: {page_title}")
+---
 
-# Encontrar todos os links (tags <a>) na página
-links = soup.find_all('a')
-for link in links:
-    print(link.get('href'))
+## Estrutura do projeto
 
-```
+projeto/
+│
+├── transfermarkt_scraper.py
+├── requirements.txt
+└── dados_esportivos/
+    ├── flamengo_elenco.csv
+    ├── palmeiras_elenco.csv
+    └── corinthians_elenco.csv
 
-### Métodos Comuns que Você Deve Conhecer
+---
 
-* `soup.find('nome_da_tag')`: Retorna a primeira tag que corresponder à busca.
-* `soup.find_all('nome_da_tag')`: Retorna uma lista de todas as tags que corresponderem à busca.
-* `soup.select('seletor_css')`: Permite encontrar elementos usando seletores CSS padrão (como `.nome-da-classe` ou `#nome-do-id`).
-* `tag.get_text()`: Extrai todo o texto dentro de uma tag e de suas tags filhas.
+## Como executar
 
-você pode acessar o Beautiful Soup pela pagina: https://pypi.org/project/beautifulsoup4/
+1. Clone ou baixe os arquivos do projeto
+
+2. Execute o script:
+
+python transfermarkt_scraper.py
+
+Ou instale manualmente:
+
+pip install -r requirements.txt
+python transfermarkt_scraper.py
+
+---
+
+## Observações
+
+- O site Transfermarkt exige um User-Agent na requisição  
+- O método raise_for_status() trata erros HTTP  
+- Os dados variam conforme a temporada  
+
+---
+
+## Autor
+
+Projeto acadêmico - Fatec Rio Claro
